@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNewDonorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Donor Information"
+            android:background="@color/colorPrimary"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="50dp"
+            android:padding="5dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Donor Name"
+            android:id="@+id/donorNameET"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Donor Phone No"
+            android:id="@+id/donorPhoneET"
+            android:inputType="phone"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Donor Location"
+            android:id="@+id/donorLocationET"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Donor Email"
+            android:id="@+id/donorEmailET"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Donor Blood Group"
+            android:textAllCaps="true"
+            android:id="@+id/donorBloodGroupET"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addDonorBTN"
+            android:text="Add"
+            android:textSize="17sp"
+            android:padding="3dp"
+            android:layout_margin="35dp"
+            android:background="@color/colorPrimary"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
