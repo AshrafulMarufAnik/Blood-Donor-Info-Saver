@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         uid = firebaseAuth.getCurrentUser().getUid();
         //getUserDataFromDB();
         getAllDonorsDataFromDBThroughModelClass();
-        configDonorListRV();
 
         addDonorFABTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +50,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void getUserDataFromDB() {
         DatabaseReference userRef = databaseReference.child("Users(SaveInfoApp)").child(uid).child("user information");
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    dataSnapshot.getValue();
+                    //create user class
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -63,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
                     donorList.clear();
 
                     for(DataSnapshot donorData: dataSnapshot.getChildren()){
-                       donorData.getValue(Donor.class);
+                       Donor newDonor = donorData.getValue(Donor.class);
+                       donorList.add(newDonor);
                        donorAdapter.notifyDataSetChanged();
                     }
                 }
@@ -76,18 +90,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void configDonorListRV() {
-        donorListRV.setLayoutManager(new LinearLayoutManager(this));
-        donorListRV.setAdapter(donorAdapter);
-    }
-
     private void init() {
+        addDonorFABTN = findViewById(R.id.addNewDonorFABTN);
         donorList = new ArrayList<>();
+
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
         donorAdapter = new DonorAdapter(donorList,this);
         donorListRV = findViewById(R.id.donorListRV);
-        addDonorFABTN = findViewById(R.id.addNewDonorFABTN);
+        donorListRV.setLayoutManager(new LinearLayoutManager(this));
+        donorListRV.setAdapter(donorAdapter);
+
     }
 
 }
