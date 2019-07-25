@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SaveInfo FireBase Demo App</string>
+    <string name="register"><b><u>Register</u></b></string>
 </resources>

@@ -34,13 +34,8 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        setTitle("Register");
         init();
-
-        if(firebaseAuth.getCurrentUser()!=null){
-            Intent intent = new Intent(RegistrationActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
         
         registerBTN.setOnClickListener(new View.OnClickListener() {
             @Override

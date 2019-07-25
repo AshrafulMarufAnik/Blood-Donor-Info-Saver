@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Donor> donorList;
+    private User currentUser;
     private DonorAdapter donorAdapter;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -28,15 +30,17 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addDonorFABTN;
 
     private String uid;
+    private TextView userNameTV,userEmailTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("Home");
         init();
         uid = firebaseAuth.getCurrentUser().getUid();
-        //getUserDataFromDB();
+        getUserDataFromDB();
         getAllDonorsDataFromDBThroughModelClass();
 
         addDonorFABTN.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    dataSnapshot.getValue();
-                    //create user class
+                    currentUser = dataSnapshot.getValue(User.class);
+                    userNameTV.setText(currentUser.getUserName());
+                    userEmailTV.setText(currentUser.getUserEmail());
                 }
             }
 
@@ -92,7 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         addDonorFABTN = findViewById(R.id.addNewDonorFABTN);
+        userNameTV = findViewById(R.id.userNameTV);
+        userEmailTV = findViewById(R.id.userEmailTV);
         donorList = new ArrayList<>();
+        currentUser = new User();
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();

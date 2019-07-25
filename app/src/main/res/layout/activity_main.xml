@@ -36,6 +36,7 @@
                 android:layout_margin="5dp"
                 android:padding="2dp"
                 android:text="User Name"
+                android:id="@+id/userNameTV"
                 android:textStyle="bold"/>
 
             <TextView
@@ -43,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="2dp"
-                android:text="User Email"/>
+                android:text="User Email"
+                android:id="@+id/userEmailTV"/>
 
         </LinearLayout>
 

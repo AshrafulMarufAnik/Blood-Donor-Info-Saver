@@ -30,6 +30,7 @@ public class AddNewDonorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_donor);
 
+        setTitle("Add new Donor");
         init();
 
         uid = firebaseAuth.getCurrentUser().getUid();
