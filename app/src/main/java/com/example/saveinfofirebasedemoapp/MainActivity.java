@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private RecyclerView donorListRV;
+    private FloatingActionButton addDonorFABTN;
 
     private String uid;
 
@@ -33,15 +36,22 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         uid = firebaseAuth.getCurrentUser().getUid();
-        configDonorListRV();
-        getUserDataFromDB();
+        //getUserDataFromDB();
         getAllDonorsDataFromDBThroughModelClass();
+        configDonorListRV();
+
+        addDonorFABTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,AddNewDonorActivity.class));
+            }
+        });
 
     }
 
     private void getUserDataFromDB() {
         DatabaseReference userRef = databaseReference.child("Users(SaveInfoApp)").child(uid).child("user information");
-        
+
     }
 
     private void getAllDonorsDataFromDBThroughModelClass() {
@@ -77,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         donorAdapter = new DonorAdapter(donorList,this);
         donorListRV = findViewById(R.id.donorListRV);
+        addDonorFABTN = findViewById(R.id.addNewDonorFABTN);
     }
 
-    public void goToAddNewDonorActivity(View view) {
-    }
 }

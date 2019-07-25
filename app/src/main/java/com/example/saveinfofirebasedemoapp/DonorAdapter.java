@@ -36,7 +36,6 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.ViewHolder> 
         holder.donorEmailTV.setText(currentDonor.getDonorEmail());
         holder.donorBloodGroupTV.setText(currentDonor.getDonorBloodGroup());
 
-        notifyDataSetChanged();
     }
 
     @Override

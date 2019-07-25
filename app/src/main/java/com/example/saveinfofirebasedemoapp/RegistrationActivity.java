@@ -24,7 +24,6 @@ import java.util.Map;
 public class RegistrationActivity extends AppCompatActivity {
     private EditText nameET,emailET,passwordET;
     private Button registerBTN;
-    private String name,email,password;
     private String userID;
 
     private FirebaseAuth firebaseAuth;
@@ -50,27 +49,19 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "Fill up all fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    name = nameET.getText().toString();
-                    email = emailET.getText().toString();
-                    password = passwordET.getText().toString();
-                }
+                    String name = nameET.getText().toString();
+                    String email = emailET.getText().toString();
+                    String password = passwordET.getText().toString();
 
-                registerNewUser(email,password);
+                    registerUser(name,email,password);
+                }
             }
         });
 
     }
 
-    private void init() {
-        nameET = findViewById(R.id.nameET);
-        emailET = findViewById(R.id.emailET);
-        passwordET = findViewById(R.id.passwordET);
-        registerBTN = findViewById(R.id.registerUserBTN);
-        firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-    }
+    private void registerUser(final String name, final String email, String password) {
 
-    public void registerNewUser(final String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -101,5 +92,18 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast.makeText(RegistrationActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void init() {
+        nameET = findViewById(R.id.nameET);
+        emailET = findViewById(R.id.emailET);
+        passwordET = findViewById(R.id.passwordET);
+        registerBTN = findViewById(R.id.registerUserBTN);
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+    }
+
+    public void registerNewUser(final String name, final String email, String password) {
+
     }
 }
